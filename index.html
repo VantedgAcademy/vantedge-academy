@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantedge Academy | Premier Online Coaching</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/css/intlTelInput.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --brand-dark: #0f172a;
+            --brand-primary: #10b981;
+            --brand-secondary: #059669;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --error: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            color: var(--text-main); 
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 8%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo { height: 55px; display: flex; align-items: center; text-decoration: none; }
+        .nav-logo svg { height: 100%; width: auto; }
+
+        nav ul { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
+        nav ul a { 
+            text-decoration: none; 
+            color: var(--brand-dark); 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        nav ul a:hover { color: var(--brand-primary); }
+
+        .btn-apply {
+            background: var(--brand-dark);
+            color: var(--white) !important;
+            padding: 0.7rem 1.8rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+        .btn-apply:hover { background: var(--brand-primary); transform: translateY(-2px); }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 8%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            align-items: center;
+            gap: 60px;
+            background: radial-gradient(circle at 90% 10%, #ecfdf5 0%, #ffffff 50%);
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--brand-dark);
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span { color: var(--brand-primary); }
+        .hero-content p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 540px; }
+        .hero-image img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px -12px rgba(15, 23, 42, 0.15); }
+
+        /* Sections */
+        section { padding: 100px 8%; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.8rem; font-weight: 800; color: var(--brand-dark); }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; margin-top: 10px; }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid #f1f5f9;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .program-card:hover {
+            border-color: var(--brand-primary);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .program-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--brand-dark); }
+        .program-card .badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: #d1fae5;
+            color: var(--brand-secondary);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Faculty Section */
+        .faculty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
+        .faculty-card { text-align: center; background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        .faculty-card img { width: 100%; height: auto; border-radius: 0; object-fit: cover; margin-bottom: 15px; border: none; }
+        .faculty-card h4 { font-size: 1.1rem; color: var(--brand-dark); margin-bottom: 5px; }
+        .faculty-card p.dept { color: var(--brand-primary); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
+        .faculty-card p.qual { color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; }
+
+        /* Study Material */
+        .study-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .study-card {
+            display: flex;
+            align-items: center;
+            padding: 24px;
+            background: white;
+            border-radius: 16px;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+        .study-card:hover { border-color: var(--brand-primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .study-card i { font-size: 2.5rem; color: #fbbf24; margin-right: 20px; }
+        .study-info span { display: block; font-size: 0.7rem; font-weight: 800; color: var(--brand-primary); }
+        .study-info strong { color: var(--brand-dark); font-size: 1.1rem; }
+
+        /* Enquiry Form Styles */
+        .form-container { max-width: 600px; margin: 0 auto; background: var(--white); border-radius: 24px; box-shadow: 0 20px 25px rgba(0,0,0,0.05); overflow: hidden; border: 1px solid #e2e8f0; }
+        .form-header { padding: 30px; text-align: center; border-bottom: 1px solid #f1f5f9; }
+        .form-header h3 { font-size: 1.25rem; font-weight: 800; color: var(--brand-dark); text-transform: uppercase; }
+        .progress-container { height: 6px; background: #f1f5f9; margin-top: 20px; border-radius: 10px; overflow: hidden; }
+        .progress-bar { height: 100%; background: var(--brand-primary); width: 33.33%; transition: width 0.4s; }
+        .form-body { padding: 30px; }
+        .step { display: none; }
+        .step.active { display: block; }
+        .input-group { margin-bottom: 18px; }
+        .input-group label { display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 6px; color: var(--text-muted); text-transform: uppercase; }
+        .input-group input, .input-group select { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 12px; outline: none; }
+        .input-group input:focus { border-color: var(--brand-primary); }
+        .btn-group { display: flex; gap: 12px; margin-top: 25px; }
+        .loader { display: none; width: 18px; height: 18px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Flag Dropdown specific styles */
+        .iti { width: 100%; }
+        .iti__country-list { z-index: 1000; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+        /* Fees Table Styles */
+        .fees-container { overflow-x: auto; background: var(--white); border-radius: 20px; border: 1px solid #e2e8f0; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--brand-dark); color: var(--white); text-align: left; padding: 20px; }
+        td { padding: 20px; border-bottom: 1px solid #f1f5f9; }
+
+        footer { background: var(--brand-dark); color: var(--white); padding: 60px 8%; text-align: center; }
+        .footer-logo { height: 60px; margin-bottom: 20px; display: inline-block; }
+        .footer-logo svg { height: 100%; }
+
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            nav ul { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="nav-logo">
+            <svg width="350" height="100" viewBox="0 0 350 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="15" width="70" height="70" rx="18" fill="#0F172A"/>
+                <path d="M50 30L30 80H45L50 65L50 30Z" fill="white"/>
+                <path d="M50 30L70 80H55L50 65L50 30Z" fill="white"/>
+                <path d="M50 40L42 65H58L50 40Z" fill="#10B981"/>
+                <text x="95" y="55" font-family="Arial, sans-serif" font-weight="900" font-size="32" fill="#0F172A">VANTEDGE</text>
+                <text x="95" y="82" font-family="Arial, sans-serif" font-weight="400" font-size="18" fill="#10B981" letter-spacing="4">ACADEMY</text>
+            </svg>
+        </a>
+        <ul>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#faculty">Faculty</a></li>
+            <li><a href="#study-material">Materials</a></li>
+            <li><a href="#fees">Fees</a></li>
+            <li><a href="#apply" class="btn-apply">Register Now</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Edge You Need to <span>Succeed.</span></h1>
+            <p>Your premier destination for online academic excellence in CBSE Foundations, IIT-JEE, and NEET preparation.</p>
+            <a href="#apply" class="btn-apply" style="padding: 1.1rem 2.5rem; font-size: 1.1rem; text-decoration: none;">Register for Admission</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80" alt="Students">
+        </div>
+    </section>
+
+    <section id="programs" style="background: var(--bg-light);">
+        <div class="section-header">
+            <h2>Academic Programs</h2>
+            <p>Tailored learning paths for every stage of your academic journey.</p>
+        </div>
+        <div class="programs-grid">
+            <div class="program-card">
+                <span class="badge">Middle School</span>
+                <h3>Foundation Excellence</h3>
+                <p style="color: var(--text-muted);">Grade 8-10. Focusing on logic, mental ability, and strong science-math fundamentals.</p>
+            </div>
+            <div class="program-card">
+                <span class="badge">Engineering</span>
+                <h3>JEE Prime</h3>
+                <p style="color: var(--text-muted);">Two-year intensive program for JEE Main & Advanced with mock test series.</p>
+            </div>
+            <div class="program-card">
+                <span class="badge">Medical</span>
+                <h3>NEET Victor</h3>
+                <p style="color: var(--text-muted);">Dedicated biology and chemistry modules focused on the latest NEET patterns.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faculty">
+        <div class="section-header"><h2>Our Expert Mentors</h2></div>
+        <div class="faculty-grid">
+            <div class="faculty-card">
+                <img src="images/vikalp.jpeg" alt="Vikalp Mishra">
+                <p class="dept">Physics HOD</p>
+                <h4>Vikalp Mishra</h4>
+                <p class="qual">M.Tech(IIT Dhanbad) <br>8+ years Teaching Experience for NEET & IIT JEE </p>
+            </div>
+            <div class="faculty-card">
+                <img src="images/umar.jpeg" alt="Umar Arif">
+                <p class="dept">Chemistry HOD</p>
+                <h4>Umar Arif</h4>
+                <p class="qual">M.Tech (IIT Dhanbad) <br>8+ years Teaching Experience for NEET & IIT JEE </p>
+            </div>
+            <div class="faculty-card">
+                <img src="images/Rajan.jpeg" alt="Rajan Kumar Singh">
+                <p class="dept">Maths HOD</p>
+                <h4>Rajan Kumar Singh</h4>
+                <p class="qual">M.Tech(IIT Dhanbad)<br>8+ years Teaching Experience for IIT JEE Mains & Advanced</p>
+            </div>
+            <div class="faculty-card">
+                <img src="images/kasthuraiah.jpeg" alt="Nadeem Ahmed">
+                <p class="dept">Biology HOD</p>
+                <h4>Kasthuraiah K</h4>
+                <p class="qual">M.Sc., M.Ed., CSIR JRF Qualified<br>10 years of Teaching Experience for NEET</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="study-material" style="background: var(--bg-light);">
+        <div class="section-header">
+            <h2>Digital Study Material</h2>
+            <p>Click on the folders below to access subjects in Google Drive.</p>
+        </div>
+        <div class="study-grid">
+            <a href="https://drive.google.com/drive/folders/1qVySyszDvMrXTCMtpfpql_n21_0Hw-E-?usp=drive_link" target="_blank" class="study-card">
+                <i class="fas fa-folder-open"></i>
+                <div class="study-info"><span>SUBJECT</span><strong>Mathematics</strong></div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1YQHjhorUdBCwLvHlVjD-DJ9L7OIJYLo_?usp=drive_link" target="_blank" class="study-card">
+                <i class="fas fa-folder-open"></i>
+                <div class="study-info"><span>SUBJECT</span><strong>Physics</strong></div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1Fxs11xMZOaUqTz_AzFcERZSQ8x0kLaoy?usp=drive_link" target="_blank" class="study-card">
+                <i class="fas fa-folder-open"></i>
+                <div class="study-info"><span>SUBJECT</span><strong>Chemistry</strong></div>
+            </a>
+            <a href="https://drive.google.com/drive/folders/1W3v0ItIxnRbOPL_DlPzgKEvmQpD6K0rz?usp=drive_link" target="_blank" class="study-card">
+                <i class="fas fa-folder-open"></i>
+                <div class="study-info"><span>SUBJECT</span><strong>Biology</strong></div>
+            </a>
+        </div>
+    </section>
+
+    <section id="apply">
+        <div class="section-header"><h2>Admission Inquiry</h2></div>
+        <div class="form-container">
+            <div class="form-header">
+                <svg width="220" height="60" viewBox="0 0 350 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="15" y="15" width="70" height="70" rx="18" fill="#0F172A"/>
+                    <path d="M50 30L30 80H45L50 65L50 30Z" fill="white"/>
+                    <path d="M50 30L70 80H55L50 65L50 30Z" fill="white"/>
+                    <path d="M50 40L42 65H58L50 40Z" fill="#10B981"/>
+                    <text x="95" y="55" font-family="Arial, sans-serif" font-weight="900" font-size="32" fill="#0F172A">VANTEDGE</text>
+                </svg>
+                <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
+            </div>
+            <form id="admissionForm" class="form-body">
+                <div class="step active" id="step1">
+                    <div class="input-group"><label>Student Full Name</label><input type="text" id="s_name" required></div>
+                    <div class="input-group"><label>Applying for Class</label>
+                        <select id="s_class" required>
+                            <option value="">Choose Class</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option>
+                        </select>
+                    </div>
+                    <div class="btn-group"><button type="button" class="btn-apply" onclick="goToStep(2)">Next <i class="fas fa-arrow-right"></i></button></div>
+                </div>
+                <div class="step" id="step2">
+                    <div class="input-group"><label>Current School</label><input type="text" id="s_school" required></div>
+                    <div class="input-group"><label>Target Exam</label>
+                        <select id="s_course" required><option value="JEE">JEE</option><option value="NEET">NEET</option><option value="Foundation">Foundation</option></select>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" style="background:#f1f5f9; color:#64748b; border:none; padding:10px 20px; border-radius:8px;" onclick="goToStep(1)">Back</button>
+                        <button type="button" class="btn-apply" onclick="goToStep(3)">Next</button>
+                    </div>
+                </div>
+                <div class="step" id="step3">
+                    <div class="input-group"><label>Parent Name</label><input type="text" id="p_name" required></div>
+                    <div class="input-group">
+                        <label>WhatsApp Number</label>
+                        <input type="tel" id="p_whatsapp" required style="width: 100%;">
+                    </div>
+                    <div class="input-group"><label>Email ID</label><input type="email" id="p_email" required></div>
+                    <div class="input-group"><label>Current City</label><input type="text" id="p_loc" required></div>
+                    <div class="btn-group">
+                        <button type="button" style="background:#f1f5f9; color:#64748b; border:none; padding:10px 20px; border-radius:8px;" onclick="goToStep(2)">Back</button>
+                        <button type="submit" class="btn-apply" id="finalBtn" style="background:var(--brand-primary)">
+                            <span id="btnText">Submit Application</span>
+                            <div class="loader" id="btnLoader"></div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div id="successScreen" style="display:none; text-align:center; padding:50px;">
+                <i class="fas fa-check-circle" style="font-size:4rem; color:var(--brand-primary); margin-bottom:20px;"></i>
+                <h3>Application Sent!</h3>
+                <p>We will contact you shortly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="fees">
+        <div class="section-header"><h2>Fee Structure</h2></div>
+        <div class="fees-container">
+            <table>
+                <thead><tr><th>Program Name</th><th>Duration</th><th>Study Mode</th><th>Total Fee</th></tr></thead>
+                <tbody>
+                    <tr><td>Foundation (Class 8)</td><td>1 Year</td><td>Online</td><td>₹80,000</td></tr>
+                    <tr><td>Foundation (Class 9)</td><td>1 Year</td><td>Online</td><td>₹85,000</td></tr>
+                    <tr><td>Foundation (Class 10)</td><td>1 Year</td><td>Online</td><td>₹90,000</td></tr>
+                    <tr><td>JEE / NEET (Class 11-12)</td><td>1 Year</td><td>Online</td><td>₹1,45,000 /yr</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">
+            <svg width="350" height="100" viewBox="0 0 350 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="15" width="70" height="70" rx="18" fill="white"/>
+                <path d="M50 30L30 80H45L50 65L50 30Z" fill="#0F172A"/>
+                <path d="M50 30L70 80H55L50 65L50 30Z" fill="#0F172A"/>
+                <path d="M50 40L42 65H58L50 40Z" fill="#10B981"/>
+                <text x="95" y="55" font-family="Arial, sans-serif" font-weight="900" font-size="32" fill="white">VANTEDGE</text>
+                <text x="95" y="82" font-family="Arial, sans-serif" font-weight="400" font-size="18" fill="#10B981" letter-spacing="4">ACADEMY</text>
+            </svg>
+        </div>
+        <p style="opacity:0.6;">&copy; 2026 Vantedge Academy. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/intlTelInput.min.js"></script>
+    <script>
+        // Initialize EmailJS with Public Key
+        (function() {
+            emailjs.init("hgtix7o8vZpuCafa4");
+        })();
+
+        // Initialize International Phone Input
+        const phoneInput = document.querySelector("#p_whatsapp");
+        const iti = window.intlTelInput(phoneInput, {
+            initialCountry: "auto",
+            geoIpLookup: callback => {
+                fetch("https://ipapi.co/json")
+                    .then(res => res.json())
+                    .then(data => callback(data.country_code))
+                    .catch(() => callback("in")); // Fallback to India
+            },
+            utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.5.0/build/js/utils.js",
+        });
+
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            document.getElementById('progressBar').style.width = (step / 3 * 100) + '%';
+        }
+
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate phone number
+            if (!iti.isValidNumber()) {
+                alert("Please enter a valid phone number for the selected country.");
+                return;
+            }
+
+            const btn = document.getElementById('finalBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoader = document.getElementById('btnLoader');
+
+            btn.disabled = true;
+            btnText.innerText = "Sending...";
+            btnLoader.style.display = "inline-block";
+
+            const params = {
+                student_name: document.getElementById('s_name').value,
+                student_class: document.getElementById('s_class').value,
+                whatsapp_number: iti.getNumber(), // Captures full number with country code
+                parent_name: document.getElementById('p_name').value,
+                email_id: document.getElementById('p_email').value,
+                location: document.getElementById('p_loc').value,
+                school_name: document.getElementById('s_school').value,
+                target_course: document.getElementById('s_course').value
+            };
+
+            emailjs.send("service_ae1m427", "template_66y1xrx", params)
+                .then(() => {
+                    document.getElementById('admissionForm').style.display = 'none';
+                    document.getElementById('successScreen').style.display = 'block';
+                })
+                .catch((err) => {
+                    console.error("EmailJS Error:", err);
+                    alert("Submission failed. Please try again.");
+                    btn.disabled = false;
+                    btnText.innerText = "Submit Application";
+                    btnLoader.style.display = "none";
+                });
+        });
+    </script>
+</body>
+</html>
